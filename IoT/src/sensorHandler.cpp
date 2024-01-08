@@ -6,7 +6,6 @@
 DHT_Unified dht(DHTPIN, DHTTYPE);
 sensor_t sensorDHT;
 
-
 void setupDHT()
 {
   dht.begin();
@@ -53,12 +52,13 @@ void setupDHT()
   Serial.println(F("------------------------------------"));
 }
 
-
 float getMoisture()
 {
   float data = map(analogRead(HIGRO_PIN), 2600, 1100, 0, 100);
-  if (data < 0) data = 0;
-  else if (data > 100) data = 100;
+  if (data < 0)
+    data = 0;
+  else if (data > 100)
+    data = 100;
   return data;
 }
 
@@ -75,7 +75,6 @@ float getHumidity()
   dht.humidity().getEvent(&event);
   return event.relative_humidity;
 }
-
 
 void readValues()
 {
