@@ -22,7 +22,7 @@ app.post("/dados", (req, res) => {
   const dados = req.body;
 
   db.run(
-    `INSERT INTO dados_sensor (temperatura, umidade, umidade_solo) VALUES (${dados.temperatura}, ${dados.umidade}, ${dados.umidade_solo})`,
+    `INSERT INTO dados_sensor (temperatura, umidade, umidade_solo) VALUES (${dados.temperatura.toFixed(2)}, ${dados.umidade}, ${dados.umidade_solo})`,
     function (err) {
       if (err) {
         return console.log(err.message);
@@ -34,7 +34,7 @@ app.post("/dados", (req, res) => {
 });
 
 app.get("/dados", (req, res) => {
-  db.all(`SELECT * FROM dados_sensor`, (err, rows) => {
+  db.all(`SELECT temperatura, data_hora FROM dados_sensor`, (err, rows) => {
     if (err) {
       return console.log(err.message);
     }
