@@ -3,7 +3,9 @@
 
 #include "sensorHandler.h"
 #include "OLEDHandler.h"
+#include "serverHandler.h"
 
-#define delayMS 5000
+
+#define delayMS 60000
 
 #endif // CONFIG_H_
