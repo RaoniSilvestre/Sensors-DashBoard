@@ -1,14 +1,24 @@
 #include "config.h"
 
-void setup() {
+int cont = 0;
+
+void setup()
+{
   Serial.begin(115200);
   setupSensors();
   setupOLED();
+  connectWiFi();
 }
 
-void loop() {
-  // Delay between measurements.
+void loop()
+{
   delay(delayMS);
   readValues();
   updateOLED();
+  
+  cont++;
+  if(cont == 60) {
+    cont = 0;
+    sendData();
+  }
 }
