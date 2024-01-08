@@ -1,13 +1,15 @@
 #include "serverHandler.h"
 #include "sensorHandler.h"
 #include "OLEDHandler.h"
+#include "network.h"
 
 HTTPClient http;
 
 void connectWiFi()
 {
-  Serial.println("Connecting to WiFi network: Carlos_Silvestre");
-  WiFi.begin("Carlos_Silvestre", "30e14d11r19c");
+  Serial.print("Connecting to WiFi network:");
+  Serial.println(ssid);
+  WiFi.begin(ssid, password);
   while (WiFi.status() != WL_CONNECTED)
   {
     Serial.print(".");
