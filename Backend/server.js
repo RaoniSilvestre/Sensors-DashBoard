@@ -40,7 +40,7 @@ app.get("/dados", (req, res) => {
       return console.log(err.message);
     }
     res.send(rows);
-	console.log("Dados capturados as ");
+	console.log("Dados capturados as " + (new Date().toString()));
   });
 });
 
