@@ -2,7 +2,7 @@ const express = require("express");
 const sqlite3 = require("sqlite3").verbose();
 const app = express();
 const bodyParser = require("body-parser");
-
+const cors = require('cors');
 const db = new sqlite3.Database("dados-sensor.db");
 
 db.run(
@@ -15,6 +15,7 @@ db.run(
   )`
 );
 
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
@@ -27,18 +28,19 @@ app.post("/dados", (req, res) => {
       if (err) {
         return console.log(err.message);
       }
-      console.log(`Dados inseridos com sucesso as ${new Date().toLocaleString()}`);
+      console.log(`Dados inseridos com sucesso as ${new Date().toLocaleString('pt-br')}`);
       res.send(`Dados inseridos com sucesso`);
     }
   );
 });
 
 app.get("/dados", (req, res) => {
-  db.all(`SELECT temperatura, data_hora FROM dados_sensor`, (err, rows) => {
+  db.all(`SELECT * FROM dados_sensor WHERE data_hora >= strftime('%Y-%m-%d %H:%M%S', 'now', '-1 day', 'localtime'); `, (err, rows) => {
     if (err) {
       return console.log(err.message);
     }
     res.send(rows);
+	console.log("Dados capturados as ");
   });
 });
 
