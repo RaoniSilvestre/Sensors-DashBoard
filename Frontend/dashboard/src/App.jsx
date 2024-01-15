@@ -129,9 +129,9 @@ export function App() {
 
   return (
     <div>
-      <Line options={optionsTemp} height={"40px"} data={tempData} />
-      <Line options={optionsHumidity} height={"40px"} data={humidityData} />
-      <Line options={optionsMoisture} height={"40px"}  data={moistureData} />
+      <Line options={optionsTemp} data={tempData} />
+      <Line options={optionsHumidity}  data={humidityData} />
+      <Line options={optionsMoisture}   data={moistureData} />
     </div>
   );
 }
